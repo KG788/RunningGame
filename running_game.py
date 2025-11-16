@@ -1,4 +1,5 @@
 import pygame
+import random
 
 pygame.init()
 
@@ -29,6 +30,39 @@ def multiplayer():
 
         pygame.display.update()
 
+        #obstacles = random.randint(1,5)
+        obstacles = 2
+        if obstacles == 1:
+            pygame.draw.rect(screen,(255,0,255), [370,0,150,50], 0)
+        elif obstacles == 2:
+            pygame.draw.rect(screen,(255,0,255), [370,0,245,50], 0)
+            pygame.draw.rect(screen,(255,0,255), [145,0,60,50], 0)
+        elif obstacles == 3:
+            pygame.draw.rect(screen,(255,0,255), [370,0,150,50], 0)
+            pygame.draw.rect(screen,(255,0,255), [145,0,150,50], 0)
+        elif obstacles == 4:
+            pygame.draw.rect(screen,(255,0,255), [445,0,75,50], 0)
+            pygame.draw.rect(screen,(255,0,255), [145,0,225,50], 0)
+        elif obstacles == 5:
+            pygame.draw.rect(screen,(255,0,255), [145,0,300,50], 0)
+        
+        #obstacles2 = random.randint(1,5)
+        '''
+        obstacles2 = 1
+        if obstacles2 == 1:
+            pygame.draw.rect(screen,(255,35,255), [105,0,305,100], 0)
+        elif obstacles2 == 2:
+            pygame.draw.rect(screen,(255,0,255), [275,0,245,100], 0)
+            pygame.draw.rect(screen,(255,0,255), [145,0,60,100], 0)
+        elif obstacles2 == 3:
+            pygame.draw.rect(screen,(255,0,255), [370,0,150,100], 0)
+            pygame.draw.rect(screen,(255,0,255), [145,0,150,100], 0)
+        elif obstacles2 == 4:
+            pygame.draw.rect(screen,(255,0,255), [445,0,75,100], 0)
+            pygame.draw.rect(screen,(255,0,255), [145,0,225,100], 0)
+        elif obstacles2 == 5:
+            pygame.draw.rect(screen,(255,0,255), [145,0,300,100], 0)
+        '''
     reset_screen()
     #Game Loop
     running = True
@@ -103,6 +137,23 @@ def single_player():
 
         pygame.display.update()
 
+        obstacles = random.randint(1,5)
+        if obstacles == 1:
+            pygame.draw.rect(screen,(255,0,255), [215,0,305,100], 0)
+        elif obstacles == 2:
+            pygame.draw.rect(screen,(255,0,255), [275,0,245,100], 0)
+            pygame.draw.rect(screen,(255,0,255), [145,0,60,100], 0)
+        elif obstacles == 3:
+            pygame.draw.rect(screen,(255,0,255), [370,0,150,100], 0)
+            pygame.draw.rect(screen,(255,0,255), [145,0,150,100], 0)
+        elif obstacles == 4:
+            pygame.draw.rect(screen,(255,0,255), [445,0,75,100], 0)
+            pygame.draw.rect(screen,(255,0,255), [145,0,225,100], 0)
+        elif obstacles == 5:
+            pygame.draw.rect(screen,(255,0,255), [145,0,300,100], 0)
+
+
+
     reset_screen()
     #Game Loop
     running = True
@@ -115,31 +166,40 @@ def single_player():
         y = 525
         w = 50
         h = 100
-        velocity = 5
+        velocity = 15
         moving_object = pygame.Rect(x,y,w,h)
-        pygame.display.update()
+        #pygame.display.update()
 
         keys = pygame.key.get_pressed()
         if keys[pygame.K_LEFT]:
-            moving_object.x -= velocity
-            reset_screen()
-            pygame.display.flip()
+            x -= velocity
+            #reset_screen()
+            #pygame.display.update()
+            #pygame.draw.rect(screen, (0,0,255), moving_object)
+            #pygame.display.flip()
+            #moving_object.move_ip(x,y)
         if keys[pygame.K_RIGHT]:
-            moving_object.x += velocity
-            reset_screen()
-            pygame.display.flip()
+            x += velocity
+            #reset_screen()
+            #pygame.display.update()
+            #pygame.draw.rect(screen, (0,0,255), moving_object)
+            #pygame.display.flip()
         if keys[pygame.K_UP]:
-            moving_object.y -= velocity
-            velocity *= 2
-            reset_screen()
-            pygame.display.flip()
+            y -= velocity
+            #velocity *= 2
+            #reset_screen()
+            #pygame.display.update()
+            #pygame.draw.rect(screen, (0,0,255), moving_object)
+            #pygame.display.flip()
         if keys[pygame.K_DOWN]:
-            moving_object.y += velocity
-            reset_screen()
-            pygame.display.flip()
-        pygame.draw.rect(screen, (0,0,255), moving_object)
-        #pygame.draw.rect(screen, (100,0,0), moving_object2)
-        pygame.display.flip()
+            y += velocity
+            #reset_screen()
+            #pygame.display.update()
+        #screen.fill((0, 0, 0))
+        #reset_screen()
+        pygame.draw.rect(screen, (0,0,255), (x,y,w,h))
+        pygame.display.update()
+    
 
 #Creating user interface
 flags = pygame.FULLSCREEN
