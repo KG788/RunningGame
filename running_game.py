@@ -29,40 +29,38 @@ def multiplayer():
         pygame.draw.rect(screen, (255,255,255), [325,640,10,40], 0)
 
         pygame.display.update()
-
-        #obstacles = random.randint(1,5)
-        obstacles = 2
-        if obstacles == 1:
-            pygame.draw.rect(screen,(255,0,255), [370,0,150,50], 0)
-        elif obstacles == 2:
-            pygame.draw.rect(screen,(255,0,255), [370,0,245,50], 0)
-            pygame.draw.rect(screen,(255,0,255), [145,0,60,50], 0)
-        elif obstacles == 3:
-            pygame.draw.rect(screen,(255,0,255), [370,0,150,50], 0)
-            pygame.draw.rect(screen,(255,0,255), [145,0,150,50], 0)
-        elif obstacles == 4:
-            pygame.draw.rect(screen,(255,0,255), [445,0,75,50], 0)
-            pygame.draw.rect(screen,(255,0,255), [145,0,225,50], 0)
-        elif obstacles == 5:
-            pygame.draw.rect(screen,(255,0,255), [145,0,300,50], 0)
         
-        #obstacles2 = random.randint(1,5)
-        '''
-        obstacles2 = 1
+        obstacles = random.randint(1,5)
+        if obstacles == 1:
+            pygame.draw.rect(screen,(255,165,0), [370,0,150,50], 0)
+        elif obstacles == 2:
+            pygame.draw.rect(screen,(255,165,0), [395,0,125,50], 0)
+            pygame.draw.rect(screen,(255,165,0), [336.5,0,30,50], 0)
+        elif obstacles == 3:
+            pygame.draw.rect(screen,(255,165,0), [450,0,70,50], 0)
+            pygame.draw.rect(screen,(255,165,0), [336.5,0,75,50], 0)
+        elif obstacles == 4:
+            pygame.draw.rect(screen,(255,165,0), [475,0,45,50], 0)
+            pygame.draw.rect(screen,(255,165,0), [336.5,0,100,50], 0)
+        elif obstacles == 5:
+            pygame.draw.rect(screen,(255,165,0), [336.5,0,145,50], 0)
+        
+        obstacles2 = random.randint(1,5)
+        
         if obstacles2 == 1:
-            pygame.draw.rect(screen,(255,35,255), [105,0,305,100], 0)
+            pygame.draw.rect(screen,(255,255,0), [180,0,145,50], 0)
         elif obstacles2 == 2:
-            pygame.draw.rect(screen,(255,0,255), [275,0,245,100], 0)
-            pygame.draw.rect(screen,(255,0,255), [145,0,60,100], 0)
+            pygame.draw.rect(screen,(255,255,0), [204,0,120,50], 0)
+            pygame.draw.rect(screen,(255,255,0), [145,0,30,50], 0)
         elif obstacles2 == 3:
-            pygame.draw.rect(screen,(255,0,255), [370,0,150,100], 0)
-            pygame.draw.rect(screen,(255,0,255), [145,0,150,100], 0)
+            pygame.draw.rect(screen,(255,255,0), [250,0,75,50], 0)
+            pygame.draw.rect(screen,(255,255,0), [145,0,70,50], 0)
         elif obstacles2 == 4:
-            pygame.draw.rect(screen,(255,0,255), [445,0,75,100], 0)
-            pygame.draw.rect(screen,(255,0,255), [145,0,225,100], 0)
+            pygame.draw.rect(screen,(255,255,0), [295,0,30,50], 0)
+            pygame.draw.rect(screen,(255,255,0), [145,0,115,50], 0)
         elif obstacles2 == 5:
-            pygame.draw.rect(screen,(255,0,255), [145,0,300,100], 0)
-        '''
+            pygame.draw.rect(screen,(255,255,0), [145,0,145,50], 0)
+        
     reset_screen()
     #Game Loop
     running = True
