@@ -4,6 +4,8 @@ import random
 pygame.init()
 
 def multiplayer():
+    start_time = 0
+    timer = 0
     #Setting up the python window
     flags = pygame.FULLSCREEN
     screen = pygame.display.set_mode((650, 650))
@@ -78,6 +80,11 @@ def multiplayer():
         moving_object2 = pygame.Rect(x-200,y,w,h) 
         pygame.display.update()
 
+        if event.type == pygame.KEYDOWN:
+            start_time = pygame.time.get_ticks()
+            timer = start_time / 1000
+        
+
         keys = pygame.key.get_pressed()
         if keys[pygame.K_LEFT]:
             moving_object.x -= velocity
@@ -118,8 +125,15 @@ def multiplayer():
         pygame.draw.rect(screen, (0,0,255), moving_object)
         pygame.draw.rect(screen, (100,0,0), moving_object2)
         pygame.display.flip()
+    if timer >= 60:
+        timer = timer/60
+        print(f'{timer} minutes')
+    else:
+        print(f'{timer} seconds')
 
-def single_player():   
+def single_player():
+    start_time = 0
+    timer = 0   
     #Setting up the python window
     flags = pygame.FULLSCREEN
     screen = pygame.display.set_mode((650, 650))
@@ -150,8 +164,6 @@ def single_player():
         elif obstacles == 5:
             pygame.draw.rect(screen,(255,0,255), [145,0,300,100], 0)
 
-
-
     reset_screen()
     #Game Loop
     running = True
@@ -167,6 +179,10 @@ def single_player():
         velocity = 15
         moving_object = pygame.Rect(x,y,w,h)
         #pygame.display.update()
+
+        if event.type == pygame.KEYDOWN:
+            start_time = pygame.time.get_ticks()
+            timer = start_time / 1000
 
         keys = pygame.key.get_pressed()
         if keys[pygame.K_LEFT]:
@@ -197,6 +213,12 @@ def single_player():
         #reset_screen()
         pygame.draw.rect(screen, (0,0,255), (x,y,w,h))
         pygame.display.update()
+    if timer >= 60:
+        timer = timer/60
+        print(f'{timer} minutes')
+    else:
+        print(f'{timer} seconds')
+
     
 
 #Creating user interface
