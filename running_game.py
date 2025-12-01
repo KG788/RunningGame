@@ -13,17 +13,13 @@ def multiplayer():
     clock = pygame.time.Clock()
 
     obstacles = random.randint(1,5)
-    #obstacles1 = random.randint(1,5)
     obstacles2 = random.randint(1,5)
-    #obstacles3 = random.randint(1,5)
-    #obstacles4 = random.randint(1,5)
     yy = 0
     yyy = 0
 
 
     def reset_screen():
         screen.fill((124,252,0))
-        pygame.display.flip()
 
         #Main Road
         pygame.draw.rect(screen, (0,0,0), [145,0,375,650], 0)
@@ -49,7 +45,6 @@ def multiplayer():
         pygame.draw.rect(screen, (255,255,255), [325,yy-560,10,40], 0)
         pygame.draw.rect(screen, (255,255,255), [325,yy-640,10,40], 0)
 
-        pygame.display.update()
         
 
         if obstacles == 1:
@@ -89,24 +84,27 @@ def multiplayer():
     Y = 600
     W = 20
     H = 45
-    velocity = 5    
+    obstacle1 = pygame.Rect(370,yy,150,50)
+    obstacle2 = obstacle1
+    #obstacle3 = pygame.Rect(180,yy,145,50)
+    #obstacle4 = pygame.Rect(145,yy,30,50)
     reset_screen()
     #Game Loop
     running = True
     while running == True:
-        clock.tick(60)
+        clock.tick(50)
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
 
-
-        moving_object = pygame.Rect(x,yy,w,h)
-        moving_object2 = pygame.Rect(X,yy,W,H) 
+        velocity = 3
+        moving_object = pygame.Rect(x,y,w,h)
+        moving_object2 = pygame.Rect(X,Y,W,H) 
         pygame.display.update()
 
         if event.type == pygame.KEYDOWN:
             start_time = pygame.time.get_ticks()
-            timer = start_time / 1000
+            timer = (start_time / 1000)/2
         
 
         keys = pygame.key.get_pressed()
@@ -114,30 +112,74 @@ def multiplayer():
             x -= velocity
         if keys[pygame.K_RIGHT]:
             x += velocity
-        #if keys[pygame.K_UP]:
-        #    y -= velocity
-        #if keys[pygame.K_DOWN]:
-        #    y += velocity
 
         if keys[pygame.K_a]:
             X -= velocity
         if keys[pygame.K_d]:
             X += velocity
-        #if keys[pygame.K_w]:
-        #    Y -= velocity
-        #if keys[pygame.K_s]:
-        #    Y += velocity
-        yy+=5
-        yyy+=5
+        yy+=4
+        yyy+=4
+        #reset_screen()
+        if obstacles == 1:
+            obstacle1 = pygame.Rect(370,yy,150,50)
+            obstacle2 = obstacle1
+            pygame.draw.rect(screen,(255,165,0), [370,yy,150,50], 0)
+        elif obstacles == 2:
+            obstacle1 = pygame.Rect(395,yy,125,50)
+            obstacle2 = pygame.Rect(336.5,yy,30,50)
+            pygame.draw.rect(screen,(255,165,0), [395,yy,125,50], 0)
+            pygame.draw.rect(screen,(255,165,0), [336.5,yy,30,50], 0)
+        elif obstacles == 3:
+            obstacle1 = pygame.Rect(450,yy,70,50)
+            obstacle2 = pygame.Rect(336.5,yy,75,50)
+            pygame.draw.rect(screen,(255,165,0), [450,yy,70,50], 0)
+            pygame.draw.rect(screen,(255,165,0), [336.5,yy,75,50], 0)
+        elif obstacles == 4:
+            obstacle1 = pygame.Rect(475,yy,45,50)
+            obstacle2 = pygame.Rect(336.5,yy,100,50)
+            pygame.draw.rect(screen,(255,165,0), [475,yy,45,50], 0)
+            pygame.draw.rect(screen,(255,165,0), [336.5,yy,100,50], 0)
+        elif obstacles == 5:
+            obstacle1 = pygame.Rect(336.5,yy,145,50)
+            obstacle2 = obstacle1
+            pygame.draw.rect(screen,(255,165,0), [336.5,yy,145,50], 0)
+        
+        
+        if obstacles2 == 1:
+            obstacle3 = pygame.Rect(180,yy,145,50)
+            obstacle4 = obstacle3
+            pygame.draw.rect(screen,(255,255,0), [180,yy,145,50], 0)
+        elif obstacles2 == 2:
+            obstacle3 = pygame.Rect(204,yy,120,50)
+            obstacle4 = pygame.Rect(145,yy,30,50)
+            pygame.draw.rect(screen,(255,255,0), [204,yy,120,50], 0)
+            pygame.draw.rect(screen,(255,255,0), [145,yy,30,50], 0)
+        elif obstacles2 == 3:
+            obstacle3 = pygame.Rect(250,yy,75,50)
+            obstacle4 = pygame.Rect(145,yy,70,50)
+            pygame.draw.rect(screen,(255,255,0), [250,yy,75,50], 0)
+            pygame.draw.rect(screen,(255,255,0), [145,yy,70,50], 0)
+        elif obstacles2 == 4:
+            obstacle3 = pygame.Rect(295,yy,30,50)
+            obstacle4 = pygame.Rect(145,yy,115,50)
+            pygame.draw.rect(screen,(255,255,0), [295,yy,30,50], 0)
+            pygame.draw.rect(screen,(255,255,0), [145,yy,115,50], 0)
+        elif obstacles2 == 5:
+            obstacle3 = pygame.Rect(145,yy,145,50)
+            obstacle4 = obstacle3
+            pygame.draw.rect(screen,(255,255,0), [145,yy,145,50], 0)
+        
+        if moving_object.colliderect(obstacle1) == True or moving_object.colliderect(obstacle2) == True or moving_object2.colliderect(obstacle3) == True or moving_object2.colliderect(obstacle4) == True:
+            pygame.time.wait(150)
+            print('Crash!')
+            pygame.QUIT
+            running = False
         if yy > 650:
             yy = 0
             obstacles = random.randint(1,5)
             obstacles2 = random.randint(1,5)
         if yyy > 650:
             yyy = 0
-
-
-
         reset_screen()
         pygame.draw.rect(screen, (0,0,255), (x,y,w,h))
         pygame.draw.rect(screen, (100,0,0), (X,Y,W,H))
@@ -145,9 +187,9 @@ def multiplayer():
 
     if timer >= 60:
         timer = timer/60
-        print(f'{timer} minutes')
+        print(f'{timer:.2f} minutes')
     else:
-        print(f'{timer} seconds')
+        print(f'{timer:.2f} seconds')
 
 def single_player():
     start_time = 0
@@ -157,64 +199,57 @@ def single_player():
     #Setting up the python window
     flags = pygame.FULLSCREEN
     screen = pygame.display.set_mode((650, 650))
-    pygame.display.set_caption('Motorcycle Game')
+    pygame.display.set_caption('Shape Game')
     clock = pygame.time.Clock()
-
     obstacles = random.randint(1,5)
     yy = 0 
 
 
     def reset_screen():
         screen.fill((124,252,0))
-        pygame.display.flip()
 
         #Main Road
         pygame.draw.rect(screen, (0,0,0), [145,0,375,650], 0)
-
-        pygame.display.update()
 
 
         if obstacles == 1:
             obstacle1 = pygame.Rect(215,yy,305,100)
             obstacle2 = obstacle1
             pygame.draw.rect(screen,(255,0,255), obstacle1)
+            pygame.draw.rect(screen,(255,0,255), obstacle2)
         elif obstacles == 2:
             obstacle1 = pygame.Rect(275,yy,245,100)
             obstacle2 = pygame.Rect(145,yy,60,100)
             pygame.draw.rect(screen,(255,0,255), obstacle1)
             pygame.draw.rect(screen,(255,0,255), obstacle2)
-            #pygame.draw.rect(screen,(255,0,255), [275,0,245,100], 0)
-            #pygame.draw.rect(screen,(255,0,255), [145,0,60,100], 0)
         elif obstacles == 3:
             obstacle1 = pygame.Rect(370,yy,150,100)
             obstacle2 = pygame.Rect(145,yy,150,100)
             pygame.draw.rect(screen,(255,0,255), obstacle1)
             pygame.draw.rect(screen,(255,0,255), obstacle2)
-            #pygame.draw.rect(screen,(255,0,255), [370,0,150,100], 0)
-            #pygame.draw.rect(screen,(255,0,255), [145,0,150,100], 0)
         elif obstacles == 4:
             obstacle1 = pygame.Rect(445,yy,75,100)
             obstacle2 = pygame.Rect(145,yy,225,100)
             pygame.draw.rect(screen,(255,0,255), obstacle1)
             pygame.draw.rect(screen,(255,0,255), obstacle2)
-            #pygame.draw.rect(screen,(255,0,255), [445,0,75,100], 0)
-            #pygame.draw.rect(screen,(255,0,255), [145,0,225,100], 0)
         elif obstacles == 5:
             obstacle1 = pygame.Rect(145,yy,300,100)
             obstacle2 = obstacle1
             pygame.draw.rect(screen,(255,0,255), obstacle1)
-            #pygame.draw.rect(screen,(255,0,255), [145,0,300,100], 0)
+            pygame.draw.rect(screen,(255,0,255), obstacle2)
+            
     x = 315
     y = 525
     w = 50
     h = 100
+    moving_object = pygame.Rect(x,y,w,h)
     reset_screen()
     #Game Loop
     running = True
-    while running == True:
+    while running == True and obstacle1.colliderect(moving_object) == False and obstacle2.colliderect(moving_object) == False:
         clock.tick(60)
         for event in pygame.event.get():
-            if event.type == pygame.QUIT:
+            if event.type == pygame.QUIT or obstacle1.colliderect(moving_object) == True or obstacle2.colliderect(moving_object) == True:
                 running = False
 
         
@@ -223,26 +258,53 @@ def single_player():
 
         if event.type == pygame.KEYDOWN:
             start_time = pygame.time.get_ticks()
-            timer = start_time / 1000
+            timer = (start_time / 1000)/2
+
 
         keys = pygame.key.get_pressed()
         if keys[pygame.K_LEFT]:
             x -= velocity
+            moving_object = pygame.Rect(x,y,w,h)
+            if obstacle1.colliderect(moving_object) == True or moving_object.colliderect(obstacle2) == True:
+                pygame.QUIT
+                running = False
         if keys[pygame.K_RIGHT]:
             x += velocity
-        #if keys[pygame.K_UP]:
-        #    y -= velocity
-        #if keys[pygame.K_DOWN]:
-        #    y += velocity
+            moving_object = pygame.Rect(x,y,w,h)
+            if obstacle1.colliderect(moving_object) == True or moving_object.colliderect(obstacle2) == True:
+                pygame.QUIT
+                running = False
         yy += 5
         reset_screen()
+        if obstacles == 1:
+            obstacle1 = pygame.Rect(215,yy,305,100)
+            obstacle2 = obstacle1
+        elif obstacles == 2:
+            obstacle1 = pygame.Rect(275,yy,245,100)
+            obstacle2 = pygame.Rect(145,yy,60,100)
+        elif obstacles == 3:
+            obstacle1 = pygame.Rect(370,yy,150,100)
+            obstacle2 = pygame.Rect(145,yy,150,100)
+        elif obstacles == 4:
+            obstacle1 = pygame.Rect(445,yy,75,100)
+            obstacle2 = pygame.Rect(145,yy,225,100)
+        elif obstacles == 5:
+            obstacle1 = pygame.Rect(145,yy,300,100)
+            obstacle2 = obstacle1
+
+
         if yy == 650:
             yy = 0
-            obstacles = obstacles = random.randint(1,5)
-        #pygame.draw.rect(screen,(255,0,255), obstacle1)
+            obstacles = random.randint(1,5)
         pygame.draw.rect(screen, (0,0,255), (x,y,w,h))
+        if moving_object.colliderect(obstacle1) == True or moving_object.colliderect(obstacle2) == True:
+            pygame.time.wait(150)
+            print('Crash!')
+            pygame.QUIT
+            running = False
         pygame.display.update()
-        #obstacles = obstacles = random.randint(1,5)
+
+        
 
     if timer >= 60:
         timer = timer/60
@@ -257,7 +319,6 @@ flags = pygame.FULLSCREEN
 screen = pygame.display.set_mode((650, 650))
 pygame.display.set_caption('Motorcycle Game')
 
-
 running = True
 while running:
     for event in pygame.event.get():
@@ -268,28 +329,20 @@ while running:
             green = (0, 255, 0)
             blue = (0, 0, 128)
 
-            
             X = 400
             Y = 400
-
             
             display_surface = pygame.display.set_mode((X, Y))
-
         
-            pygame.display.set_caption('Motorcycle Game')
-
+            pygame.display.set_caption('Shape Game')
            
             font = pygame.font.Font('freesansbold.ttf', 32)
-
-
             
             text = font.render('Single Player', True, green, blue)
             text2 = font.render('MultiPlayer', True, green, blue)
-
             
             textRect = text.get_rect()
             textRect2 = text2.get_rect()
-
             
             textRect.center = (X // 2, Y // 2)
             textRect2.center = (X // 2, (Y+100) // 2)
@@ -302,20 +355,15 @@ while running:
             display_surface.blit(text2, textRect2)
 
             for event in pygame.event.get():
-
                 
                 if event.type == pygame.QUIT:
-
                     
                     pygame.quit()
-
                     
                     quit()
-
                 
                 pygame.display.update()
-                
-           
+                           
             if event.type == pygame.MOUSEBUTTONDOWN:
                 mouse_pos = event.pos
                 if textRect2.collidepoint(mouse_pos):
